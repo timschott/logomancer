@@ -4,6 +4,14 @@
 	"version": "0.1.1",
 	"description": "words from books I've read",
 	"main": "logomancer",
+	"repository": {
+		"type": "git",
+		"url" : "https://github.com/timschott/logomancer"
+	},
+	"keywords": [
+		"books",
+		"literature"
+	],
 	"dependencies": {},
 	"engines": {
 		"node" : "*"
