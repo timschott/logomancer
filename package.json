@@ -6,14 +6,17 @@
 	"main": "logomancer",
 	"repository": {
 		"type": "git",
-		"url" : "https://github.com/timschott/logomancer"
+		"url": "https://github.com/timschott/logomancer"
 	},
 	"keywords": [
 		"books",
 		"literature"
 	],
-	"dependencies": {},
+	"dependencies": {
+		"express": "^4.17.1",
+		"hbs": "^4.0.6"
+	},
 	"engines": {
-		"node" : "*"
+		"node": "*"
 	}
 }
