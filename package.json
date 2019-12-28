@@ -1,0 +1,11 @@
+{
+	"author": "Tim Schott",
+	"name": "logomancer",
+	"version": "0.1.1",
+	"description": "words from books I've read",
+	"main": "logomancer",
+	"dependencies": {},
+	"engines": {
+		"node" : "*"
+	}
+}
