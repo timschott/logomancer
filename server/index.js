@@ -6,10 +6,18 @@ const app = express();
 
 // use hbs for front end
 const hbs = require('hbs')
-app.set('view engine', 'hbs')
+
+//this required before view engine setup
+hbs.registerPartials('public/views/partials');
+
+// view engine setup
+app.set('views', 'public/views/layout');
+
+app.set('view engine', 'hbs');
 
 // set location of views directory - public/views.
-app.set('views', 'public/views/layout');
+
+app.use(express.static('public'))
 
 // server configuration
 const PORT = 8080;

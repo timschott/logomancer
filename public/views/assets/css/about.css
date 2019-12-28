@@ -1,0 +1,6 @@
+@import 'global.css';
+
+.special-name {
+	color: purple;
+	display: inline;
+}
