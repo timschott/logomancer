@@ -1,7 +1,7 @@
 {
 	"author": "Tim Schott",
 	"name": "logomancer",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "words from books I've read",
 	"main": "logomancer",
 	"repository": {
@@ -13,6 +13,7 @@
 		"literature"
 	],
 	"dependencies": {
+		"body-parser": "^1.19.0",
 		"express": "^4.17.1",
 		"hbs": "^4.0.6"
 	},
@@ -23,6 +24,6 @@
 		"nodemon": "^2.0.2"
 	},
 	"scripts": {
-    "dev": "nodemon server/index.js"
-  }
+		"dev": "nodemon server/index.js"
+	}
 }

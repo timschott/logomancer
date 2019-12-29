@@ -1,5 +1,4 @@
 // index js creates app and sets up routing services. 
-
 const express = require('express');
 
 // create new express app and save it as "app"
@@ -26,6 +25,11 @@ app.set("view options" , {baseURLEXT: "/public/views/layouts"});
 // server configuration
 const PORT = 8080;
 
+// bodyParser for POSTs
+const bodyParser= require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // create a route for the app
 /*
 app.get('^((?!(\/|about|error)).)*$', function(req, res) {
@@ -38,7 +42,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-	// inject into FE, eventually this will coem from the database.
+  // example of how to inject content into FE
   res.render('about', { name: 'Timbo' })
 })
 
@@ -46,6 +50,17 @@ app.get('/about', (req, res) => {
 app.get('/error', (req, res) => {
   res.render('error', { problem: 'Error Page'})
 })
+
+// add quotes. 
+app.get('/submit', (req, res) => {
+  res.render('submit')
+})
+
+// handler for that request.
+app.post('/quotes', (req, res) => {
+  console.log(req.body)
+})
+
 // make the server listen to requests
 app.listen(PORT, () => {
   console.log(`Server running at: http://localhost:${PORT}/`);
