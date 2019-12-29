@@ -33,7 +33,7 @@ app.get('^((?!(\/|about|error)).)*$', function(req, res) {
 });
 */
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.render('home', {body: 'This is the body of the home page'})
 })
 
@@ -43,7 +43,7 @@ app.get('/about', (req, res) => {
 })
 
 // make another route. 
-app.get('/error', function (req, res) {
+app.get('/error', (req, res) => {
   res.render('error', { problem: 'Error Page'})
 })
 // make the server listen to requests

@@ -18,5 +18,11 @@
 	},
 	"engines": {
 		"node": "*"
-	}
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.2"
+	},
+	"scripts": {
+    "dev": "nodemon server/index.js"
+  }
 }
