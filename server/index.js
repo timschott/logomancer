@@ -1,4 +1,5 @@
-// import express (after npm install express)
+// index js creates app and sets up routing services. 
+
 const express = require('express');
 
 // create new express app and save it as "app"
@@ -19,6 +20,9 @@ app.set('view engine', 'hbs');
 
 app.use(express.static('public'))
 
+// sets base url for use in .hbs files. 
+
+app.set("view options" , {baseURLEXT: "/public/views/layouts"});
 // server configuration
 const PORT = 8080;
 
@@ -34,7 +38,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/about', (req, res) => {
-	// inject into FE
+	// inject into FE, eventually this will coem from the database.
   res.render('about', { name: 'Timbo' })
 })
 
