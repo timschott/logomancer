@@ -17,18 +17,6 @@
 /*
     Multicoloured Hover Variations
 */
-.copyright-text {
-	margin:auto; 
-	max-width:250px; 
-	padding-top:250px; 
-	padding-right:100px;
-}
-
-.i-am-centered { 
-	margin: auto; 
-	max-width: 250px; 
-	padding-top: 25px;
-}
  
  #social-li:hover {
      color: #0e76a8;

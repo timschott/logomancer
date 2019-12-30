@@ -29,24 +29,26 @@
 /* global styles. */
  html {
      font-size:100%;
+    height: 100%
 }
  h1 {
      color: green;
- 	 padding: 20px 50px;
+ 	 padding: 20px;
 }
  h2 {
      color: blue;
- 	 padding: 20px 50px;
+ 	 padding: 20px;
 }
 body {
      color: black;
      padding-left: 20px;
-	 padding-bottom: 70px;
+     height: 100%;
      font-family: 'Baskervville', serif;
      text-rendering: optimizeLegibility;
 }
 p {
-	 padding: 20px 50px;
+	 padding: 20px;
+     margin:0 ;
 }
  a:link {
      color: blue;

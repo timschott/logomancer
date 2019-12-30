@@ -1,33 +1,43 @@
 <!doctype html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <title>Submit</title>
-      <link rel="stylesheet" type="text/css" href="/views/assets/css/global.css">
-      <link rel="stylesheet" type="text/css" href="/views/assets/css/submit.css">
-   </head>
-      {{> header }}
-   <body>
-      <h2>Test</h2>
-      <p>
-         This is a test.
-      </p>
-      <!-- bootstrap form -->
-      <form action="/quotes" method="post" class="form-quote-collection">
-        <div class="row">
-            <div class="form-group col-lg-2">
-  			<label for="book"  class="sr-only">Book</label>
-                <input type="text" id="book" name="book" class="form-control" />
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group col-lg-6 ">
-                <label for="code" class="sr-only">Quote</label>
-                <input type="text" id="quote" name="quote" class="form-control" />
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Submit</title>
+    <link rel="stylesheet" type="text/css" href="/views/assets/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/views/assets/css/submit.css">
+</head>
+{{> header }}
+
+<body>
+    <h2>Submit a Word</h2>
+    <!-- bootstrap form -->
+    <div class="d-flex justify-content-center align-items-center fluid-container ">
+        <div class="row ">
+            <form action="/quotes" method="post" class="form-quote-collection">
+                <div class="form-group">
+                    <label for="book">Word</label>
+                    <input type="text" id="word" name="word" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="book">Book</label>
+                    <input type="text" id="book" name="book" class="form-control" />
+                </div>
+                <div class="form-group">
+
+                    <label for="sentence">Sentence</label>
+                    <input type="text" id="sentence" name="sentence" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button class="btn btn-primary mb-2" type="submit">Submit</button>
+                    </div>
+                </div>
         </div>
-  		<button type="submit" class="btn btn-primary mb-2">Submit</button>
-   </body>
-	  {{> footer }}
+        </form>
+    </div>
+    </div>
+</body>
+{{> footer }}
+
 </html>
