@@ -1,0 +1,21 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Words</title>
+    <link rel="stylesheet" type="text/css" href="/views/assets/css/global.css">
+        <link rel="stylesheet" type="text/css" href="/views/assets/css/about.css">
+</head>
+<body>
+{{> header }}
+
+<ul>
+    {{#each words}}
+        <li>{{word}} is from <span class = 'special-name'>{{book}}</span>. It means: <span class = 'special-name'>{{definition}}</span>. In the book, it's used like this: <span class = 'special-name'>{{definition}}</span></li>
+    {{/each}}
+</ul>
+
+{{> footer }}
+</body>
+</html>

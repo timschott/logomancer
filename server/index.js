@@ -97,3 +97,32 @@ app.post('/quotes', (req, res) => {
         res.redirect('/')
     })
 })
+
+
+// display words
+app.get('/words', (req, res) => {
+        db.collection('words', function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            console.log(items)
+
+            res.render('words', {
+                words: items
+            })
+        })
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
