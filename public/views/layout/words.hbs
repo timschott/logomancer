@@ -1,21 +1,42 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Words</title>
     <link rel="stylesheet" type="text/css" href="/views/assets/css/global.css">
-        <link rel="stylesheet" type="text/css" href="/views/assets/css/about.css">
+    <link rel="stylesheet" type="text/css" href="/views/assets/css/about.css">
+    <script type="text/javascript" src="assets/twitterbootstrap/js/bootstrap-tab.js"></script>
 </head>
+
 <body>
-{{> header }}
+    {{> header }}
 
-<ul>
-    {{#each words}}
-        <li>{{word}} is from <span class = 'special-name'>{{book}}</span>. It means: <span class = 'special-name'>{{definition}}</span>. In the book, it's used like this: <span class = 'special-name'>{{definition}}</span></li>
-    {{/each}}
-</ul>
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="myList" role="tablist">
+                {{#each words}} {{#getKey this.id this.word}} {{/getKey}} {{/each}}
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content">
+                {{#each words}} {{#getDescription this.id this.book this.word this.sentence this.definition this.page}} {{/getDescription}} {{/each}}
+            </div>
+        </div>
+    </div>
 
-{{> footer }}
+
+    {{> footer }}
 </body>
+<script>
+	$('#myList a').on('click', function(e) {
+e.preventDefault();
+$(this).tab('show');
+var theThis = $(this);
+$('#myList a').removeClass('active');
+theThis.addClass('active');
+});
+</script>
+
 </html>

@@ -1,23 +1,26 @@
 // index js creates app and sets up routing services. 
 const express = require('express')
 
+var jsdom = require("jsdom");
 // create new express app and save it as "app"
 const app = express()
 
-//this required before view engine setup
-
+//this is required before view engine setup
 // assert that we're using hbs. 
 app.set('view engine', 'hbs')
 
-const hbs = require('hbs')
+// use express-hbs so we can use handlebars helpers. 
+var hbs = require('express-hbs')
 
-hbs.registerPartials('public/views/partials')
+// sets partials directory. 
+app.engine('hbs', hbs.express4({
+  partialsDir: 'public/views/partials'
+}))
 
 // view engine setup
 app.set('views', 'public/views/layout')
 
 // sets base url for use in .hbs files. 
-
 app.set("view options", {
     baseURLEXT: "/public/views/layouts"
 })
@@ -26,7 +29,7 @@ app.set("view options", {
 app.use(express.static('public'))
 
 // server configuration
-const PORT = 8080;
+const PORT = 8080
 
 // bodyParser for POSTs
 const bodyParser = require('body-parser')
@@ -53,6 +56,7 @@ var db
 require('dotenv').config({path:'.env'})
 var url = process.env.MONGO_URI
 
+// connect to database.
 MongoClient.connect(url,  { useUnifiedTopology: true }, (err, client) => {
     if (err) return console.log(err)
     db = client.db('fun-words') // whatever your database name is
@@ -66,7 +70,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    // example of how to inject content into FE
+    // inject content into FE
     res.render('about', {
         name: 'Timothy Schott'
     })
@@ -79,17 +83,47 @@ app.get('/error', (req, res) => {
     })
 })
 
-// add quotes. 
+// hidden submit endpoint. 
 app.get('/submit', (req, res) => {
     res.render('submit')
 })
 
-// handler for that request.
-// takes the input of the form and puts it in the database. 
+// allows us to inject dynamic handlebars. hand off an dynamic id and word label
+hbs.registerHelper('getKey', function(id, word, options) {
+
+    var out = ""
+    out = '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' + id.toLowerCase() + '" ' + 'role="tab">' + word + '</a>'
+    return out
+})
+
+// display the description of the word. 
+hbs.registerHelper('getDescription', function(id, book, word, sentence, definition, page, options) {
+    var start = sentence.indexOf(word)
+
+    var tail = sentence.slice(start)
+
+    var end = tail.indexOf(" ")
+
+    var highlighted = sentence.substring(0, start) + '<mark>' + sentence.substring(start, start+end) + '</mark>' + sentence.substring(start+end)
+
+    var tmp = ""    
+
+    tmp = '<div class="tab-pane" id ="' + id.toLowerCase() + '" ' + 'role="tabpanel">'
+    + '<p> This word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>'
+    + '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span> '
+    + 'on page ' + '<span class = "special-name">' + page + '</span>. ' +'</p>'
+    + '<p> Here is the sentence it is used in: </p><p> ' + highlighted +
+     '</p></div>'
+    return tmp
+})
+
+// takes the input of the submit form and puts it in the database. 
 app.post('/quotes', (req, res) => {
     var d = new Date().toString()
     var obj = req.body;
     obj.date = d;
+    obj.id = obj.word+ '_' + obj.book;
+
     db.collection('words').insertOne(obj, (err, result) => {
     if (err) return console.log(err)
 
@@ -98,31 +132,13 @@ app.post('/quotes', (req, res) => {
     })
 })
 
-
-// display words
+// display dictionary. 
 app.get('/words', (req, res) => {
         db.collection('words', function(err, collection) {
         collection.find().toArray(function(err, items) {
-            console.log(items)
-
             res.render('words', {
                 words: items
             })
         })
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -50,18 +50,4 @@ p {
 	 padding: 20px;
      margin:0 ;
 }
- a:link {
-     color: blue;
-     text-decoration: underline;
-}
-/* mouse over link */
- a:hover {
-     color: pink;
-     text-decoration: underline, bold;
-     outline: 0;
-}
-/* selected link */
- a:active {
-     color: #9542f5;
-}
  
