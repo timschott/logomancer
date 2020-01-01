@@ -89,26 +89,26 @@ app.get('/submit', (req, res) => {
 })
 
 // allows us to inject dynamic handlebars. hand off an dynamic id and word label
-hbs.registerHelper('getKey', function(id, word, options) {
+hbs.registerHelper('getKey', function(word, options) {
 
     var out = ""
-    out = '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' + id.toLowerCase() + '" ' + 'role="tab">' + word + '</a>'
+    out = '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' + word.toLowerCase() + '" ' + 'role="tab">' + word + '</a>'
     return out
 })
 
 // display the description of the word. 
-hbs.registerHelper('getDescription', function(id, book, word, sentence, definition, page, options) {
+hbs.registerHelper('getDescription', function(book, word, sentence, definition, page, options) {
     var start = sentence.indexOf(word)
 
     var tail = sentence.slice(start)
 
     var end = tail.indexOf(" ")
 
-    var highlighted = sentence.substring(0, start) + '<mark>' + sentence.substring(start, start+end) + '</mark>' + sentence.substring(start+end)
+    var highlighted = sentence.substring(0, start) + '<span style= "background-color: #69dcd6">' + sentence.substring(start, start+end) + '</span>' + sentence.substring(start+end)
 
-    var tmp = ""    
+    var tmp = ""
 
-    tmp = '<div class="tab-pane" id ="' + id.toLowerCase() + '" ' + 'role="tabpanel">'
+    tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">'
     + '<p> This word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>'
     + '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span> '
     + 'on page ' + '<span class = "special-name">' + page + '</span>. ' +'</p>'
@@ -122,7 +122,6 @@ app.post('/quotes', (req, res) => {
     var d = new Date().toString()
     var obj = req.body;
     obj.date = d;
-    obj.id = obj.word+ '_' + obj.book;
 
     db.collection('words').insertOne(obj, (err, result) => {
     if (err) return console.log(err)
