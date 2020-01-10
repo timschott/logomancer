@@ -1,0 +1,5 @@
+.list-group {
+    height: auto;
+    max-height: 315px;
+    overflow-x: hidden;
+}

@@ -1,3 +1,5 @@
+
+
 // index js creates app and sets up routing services. 
 const express = require('express')
 
@@ -14,7 +16,7 @@ var hbs = require('express-hbs')
 
 // sets partials directory. 
 app.engine('hbs', hbs.express4({
-  partialsDir: 'public/views/partials'
+    partialsDir: 'public/views/partials'
 }))
 
 // view engine setup
@@ -53,11 +55,15 @@ const MongoClient = require('mongodb').MongoClient
 var db
 
 // creds. grab from enviroment var file.
-require('dotenv').config({path:'.env'})
+require('dotenv').config({
+    path: '.env'
+})
 var url = process.env.MONGO_URI
 
 // connect to database.
-MongoClient.connect(url,  { useUnifiedTopology: true }, (err, client) => {
+MongoClient.connect(url, {
+    useUnifiedTopology: true
+}, (err, client) => {
     if (err) return console.log(err)
     db = client.db('fun-words') // whatever your database name is
     app.listen(PORT, () => {
@@ -89,7 +95,7 @@ app.get('/submit', (req, res) => {
 })
 
 // allows us to inject dynamic handlebars. hand off an dynamic id and word label
-hbs.registerHelper('getKey', function(word, options) {
+hbs.registerHelper('getKey', function (word, options) {
 
     var out = ""
     out = '<a class="list-group-item list-group-item-action" data-toggle="list" href="#' + word.toLowerCase() + '" ' + 'role="tab">' + word + '</a>'
@@ -97,23 +103,22 @@ hbs.registerHelper('getKey', function(word, options) {
 })
 
 // display the description of the word. 
-hbs.registerHelper('getDescription', function(book, word, sentence, definition, page, options) {
+hbs.registerHelper('getDescription', function (book, word, sentence, definition, options) {
     var start = sentence.indexOf(word)
 
     var tail = sentence.slice(start)
 
     var end = tail.indexOf(" ")
 
-    var highlighted = sentence.substring(0, start) + '<span style= "background-color: #69dcd6">' + sentence.substring(start, start+end) + '</span>' + sentence.substring(start+end)
+    var highlighted = sentence.substring(0, start) + '<span style= "background-color: #69dcd6">' + sentence.substring(start, start + end) + '</span>' + sentence.substring(start + end)
 
     var tmp = ""
 
-    tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">'
-    + '<p> This word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>'
-    + '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span> '
-    + 'on page ' + '<span class = "special-name">' + page + '</span>. ' +'</p>'
-    + '<p> Here is the sentence it is used in: </p><p> ' + highlighted +
-     '</p></div>'
+    tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">' +
+        '<p> This word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>' +
+        '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span>. ' + '</p>' +
+        '<p> Here is the sentence it is used in: </p><p> ' + highlighted +
+        '</p></div>'
     return tmp
 })
 
@@ -124,20 +129,26 @@ app.post('/quotes', (req, res) => {
     obj.date = d;
 
     db.collection('words').insertOne(obj, (err, result) => {
-    if (err) return console.log(err)
+        if (err) return console.log(err)
 
-    console.log('saved to database')
+        console.log('saved to database')
         res.redirect('/')
     })
 })
 
 // display dictionary. 
 app.get('/words', (req, res) => {
-        db.collection('words', function(err, collection) {
-        collection.find().toArray(function(err, items) {
+
+    db.collection('words', function (err, collection) {
+
+        collection.countDocuments({}, function(err, count) {
+        
+        collection.find().sort({"word": 1}).toArray(function (err, items) {
             res.render('words', {
-                words: items
+                words: items,
+                number: count
             })
-        })
     })
+    })
+})
 })
