@@ -66,7 +66,7 @@ var url = process.env.MONGO_URI
 MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
 
     if (err) return console.log(err)
-    db = client.db('fun-words') // the database name to this
+    db = client.db('fun-words') // the database name to this, try
     app.listen(PORT, () => {
         console.log(`Server running at: http://localhost:${PORT}/`);
     })
