@@ -1,7 +1,7 @@
 {
 	"author": "Tim Schott",
 	"name": "logomancer",
-	"version": "0.1.5",
+	"version": "1.0.0",
 	"description": "Cool words from books I've read.",
 	"main": "logomancer",
 	"repository": {
@@ -13,7 +13,10 @@
 		"literature",
 		"mongodb",
 		"node",
-		"handlebars"
+		"handlebars",
+		"pynchon",
+		"joyce",
+		"nabokov"
 	],
 	"dependencies": {
 		"body-parser": "^1.19.0",
@@ -26,12 +29,13 @@
 		"mongodb": "^3.4.1"
 	},
 	"engines": {
-		"node": "*"
+		"node": "10.5.1"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.2"
 	},
 	"scripts": {
-		"dev": "nodemon server/index.js"
+		"dev": "nodemon server/index.js",
+		"start": "node server/index.js"
 	}
 }
