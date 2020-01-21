@@ -31,7 +31,7 @@ app.set("view options", {
 app.use(express.static('public'))
 
 // server configuration
-const PORT = 8080
+const PORT = process.env.PORT || 8080
 
 // bodyParser for POSTs
 const bodyParser = require('body-parser')
