@@ -74,7 +74,24 @@ MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
 
 app.get('/', (req, res) => {
 
-    res.render('home')
+    db.collection('words', function (err, collection) {
+
+        // a few different cascading functions that count and sort the database to serve the views.
+        collection.countDocuments({}, function(err, word_count) {
+        
+            collection.distinct("book", function(err, books) {
+
+                var book_count = books.length
+
+                    res.render('home', {
+
+                        word_total: word_count,
+                        book_total: book_count
+
+                    })
+            })
+        })
+    })
 })
 
 app.get('/about', (req, res) => {
@@ -162,7 +179,8 @@ app.get('/words', (req, res) => {
 
                 var book_count = books.length
 
-                collection.find().sort({"word": 1}).toArray(function (err, items) {
+                // case insensitive sort. 
+                collection.find({}).collation({'locale':'en'}).sort({'word':1}).toArray(function (err, items) {
 
                     res.render('words', {
 
