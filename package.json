@@ -1,7 +1,7 @@
 {
 	"author": "Tim Schott",
 	"name": "logomancer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Cool words from books I've read.",
 	"main": "logomancer",
 	"repository": {
@@ -16,7 +16,8 @@
 		"handlebars",
 		"pynchon",
 		"joyce",
-		"nabokov"
+		"nabokov",
+		"heroku"
 	],
 	"dependencies": {
 		"body-parser": "^1.19.0",
