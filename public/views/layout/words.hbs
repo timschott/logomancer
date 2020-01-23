@@ -13,24 +13,21 @@
 
 <body>
     {{> header }}
-    <p>
-    Here are the words. There are <span class = 'special-name'>{{ word_total }}</span> entries from <span class = 'special-name'>{{ book_total }}</span> different books.
+    <p style="text-align: center">
+    There are <span class = 'special-name'>{{ word_total }}</span> entries from <span class = 'special-name'>{{ book_total }}</span> different books.
 </p>
     <div class="row">
-        <div class="col-4">
-            <div class="list-group" id="myList" role="tablist">
+        <div class="col-xs-2 col-md-3">
+            <div class="list-group text-center" id="myList" role="tablist">
                 {{#each words}} {{#getKey this.word}} {{/getKey}} {{/each}}
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-xs-10 col-md-9">
             <div class="tab-content">
-                {{#each words}} {{#getDescription this.book this.word this.sentence this.definition this.page}} {{/getDescription}} {{/each}}
+                {{#each words}} {{#getDescription this.book this.author this.word this.sentence this.definition this.page}} {{/getDescription}} {{/each}}
             </div>
         </div>
     </div>
-
-
-    {{> footer }}
 </body>
 <script>
     $('#myList a').on('click', function(e) {

@@ -110,22 +110,23 @@ hbs.registerHelper('getKey', function (word, options) {
 })
 
 // display the description of the word. 
-hbs.registerHelper('getDescription', function (book, word, sentence, definition, options) {
+hbs.registerHelper('getDescription', function (book, author, word, sentence, definition, options) {
 
-    var start = sentence.indexOf(word)
+    var regex = new RegExp('\\b' + word + '\\b');
+    var match = regex.exec(sentence)
+    var start = match.index
+    var end = match.index + match[0].length
 
-    var tail = sentence.slice(start)
-
-    var end = tail.indexOf(" ")
-
-    var highlighted = sentence.substring(0, start) + '<span style= "background-color: #69dcd6">' + sentence.substring(start, start + end) + '</span>' + sentence.substring(start + end)
+    var highlighted = sentence.substring(0, start) 
+    + '<span style= "background-color: #69dcd6">' 
+    + sentence.substring(start, end) + '</span>' + sentence.substring(end)
 
     var tmp = ""
 
     tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">' +
-        '<p> This word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>' +
-        '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span>. ' + '</p>' +
-        '<p> Here is the sentence it is used in: </p><p> ' + highlighted +
+        '<p> The word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>' +
+        '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span> by <span class="special-name">' + author + '</span> as follows: </p>' +
+        '<p> ' + highlighted +
         '</p></div>'
 
     return tmp

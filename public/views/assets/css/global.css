@@ -5,6 +5,11 @@
      body {
          font-size:1rem;
     }
+    .list-group {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden;
+    }
      .topnav a:not(:only-child), .dropdown .dropbtn {
          display: block;
          text-transform: uppercase;
