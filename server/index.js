@@ -128,17 +128,31 @@ hbs.registerHelper('getKey', function (word, options) {
 
 // display the description of the word. 
 hbs.registerHelper('getDescription', function (book, author, word, sentence, definition, options) {
-
-    var regex = new RegExp('\\b' + word + '\\b');
-    var match = regex.exec(sentence)
-    var start = match.index
-    var end = match.index + match[0].length
-
-    var highlighted = sentence.substring(0, start) 
-    + '<span style= "background-color: #69dcd6">' 
-    + sentence.substring(start, end) + '</span>' + sentence.substring(end)
-
+    
+    var regex = ""
+    var match = ""
+    var start = ""
+    var end = ""
+    var highlighted = ""
     var tmp = ""
+
+    if (word.indexOf('-') == -1) {
+        regex = new RegExp('\\b' + word + '\\b');
+        match = regex.exec(sentence)
+        start = match.index
+        end = match.index + match[0].length
+        highlighted = sentence.substring(0, start) 
+            + '<span style= "background-color: #69dcd6">' 
+            + sentence.substring(start, end) + '</span>' + sentence.substring(end)
+    } else {
+        var regex = new RegExp('\\b\\s' + word + '\\s\\b');
+        var match = regex.exec(sentence)
+        var start = match.index
+        var end = match.index + match[0].length
+        highlighted = sentence.substring(0, start+1) 
+            + '<span style= "background-color: #69dcd6">' 
+            + sentence.substring(start+1, end-1) + '</span>' + sentence.substring(end-1)
+    }
 
     tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">' +
         '<p> The word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>' +
