@@ -47,6 +47,7 @@
 body {
      color: black;
      padding-left: 20px;
+     padding-right: 20px;
      height: 100%;
      font-family: 'Baskervville', serif;
      text-rendering: optimizeLegibility;

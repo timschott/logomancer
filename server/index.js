@@ -177,6 +177,24 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     return tmp
 })
 
+hbs.registerHelper('getTweet', function(word) {
+
+    var data_text = "I just learned an awesome new word, " + word + ", at"
+    console.log(data_text)
+    var data_url = "https://logomancing.com"
+
+    tmp = '<a href="https://twitter.com/intent/tweet"' +
+    'class="twitter-hashtag-button"' +
+    'data-text=' + data_text +
+    'data-url=' + data-url +
+    'data-related="bigschottt"' +
+    'data-lang="en" data-dnt="true" ' +
+    'data-show-count="false">tweet word</a>' +
+    '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+
+    return tmp
+})
+
 // takes the input of the submit form and puts it in the database. 
 app.post('/quotes', (req, res) => {
 
