@@ -146,12 +146,26 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
             + sentence.substring(start, end) + '</span>' + sentence.substring(end)
     } else {
         var regex = new RegExp('\\b\\s' + word + '\\s\\b');
-        var match = regex.exec(sentence)
-        var start = match.index
-        var end = match.index + match[0].length
-        highlighted = sentence.substring(0, start+1) 
+
+        if (regex.test(sentence)) {
+            var match = regex.exec(sentence)
+            var start = match.index
+            var end = match.index + match[0].length
+            highlighted = sentence.substring(0, start+1) 
             + '<span style= "background-color: #69dcd6">' 
             + sentence.substring(start+1, end-1) + '</span>' + sentence.substring(end-1)
+        } else {
+            var regex = new RegExp('\\b\\s' + word);
+
+            if (regex.test(sentence)) {
+            var match = regex.exec(sentence)
+            var start = match.index
+            var end = sentence.length
+            highlighted = sentence.substring(0, start+1) 
+            + '<span style= "background-color: #69dcd6">' 
+            + sentence.substring(start+1, end-1) + '</span>' + sentence.substring(end-1)
+            }
+        }
     }
 
     tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">' +
