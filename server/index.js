@@ -168,14 +168,12 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
         }
     }
 
-    var data_text = "I just learned an awesome new word &#8212; " + word + " &#8212; at https://logomancing.com built by @bigschottt."
+    var data_text = "I just learned an awesome new word &#8212; " + word + " &#8212; at https://logomancing.com built by @bigschottt"
     var data_url = "https://logomancing.com"
 
     var tweet = '<p style = "text-align:center"><a href="https://twitter.com/intent/tweet" ' +
     'class="twitter-hashtag-button" ' +
     'data-text=' + '"' + data_text + '" ' +
-    'data-url=' + '"' + data_url  + ' ' +
-    'data-related="bigschottt"' +
     'data-lang="en" data-dnt="true" ' +
     'data-show-count="false">tweet word</a>' +
     '</p>'
