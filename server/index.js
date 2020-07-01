@@ -137,6 +137,7 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     var tmp = ""
 
     if (word.indexOf('-') == -1) {
+        // need to update this for Preternatural. 
         regex = new RegExp('\\b' + word + '\\b');
         match = regex.exec(sentence)
         start = match.index
