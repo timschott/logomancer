@@ -248,3 +248,7 @@ app.get('/words', (req, res) => {
         })
     })
 })
+
+app.get('/search', (req, res) => {
+    res.render('search')
+})
