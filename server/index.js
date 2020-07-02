@@ -137,14 +137,25 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     var tmp = ""
 
     if (word.indexOf('-') == -1) {
-        // need to update this for Preternatural. 
-        regex = new RegExp('\\b' + word + '\\b');
-        match = regex.exec(sentence)
-        start = match.index
-        end = match.index + match[0].length
-        highlighted = sentence.substring(0, start) 
+        var regex = new RegExp('\\b' + word + '\\b');
+        if (regex.test(sentence)) {
+            match = regex.exec(sentence)
+            start = match.index
+            end = match.index + match[0].length
+            highlighted = sentence.substring(0, start) 
             + '<span style= "background-color: #69dcd6">' 
             + sentence.substring(start, end) + '</span>' + sentence.substring(end)
+        } else {
+            var regex = new RegExp(word + '\\b');
+            if (regex.test(sentence)) {
+            match = regex.exec(sentence)
+            start = match.index
+            end = match.index + match[0].length
+            highlighted = sentence.substring(0, start) 
+            + '<span style= "background-color: #69dcd6">' 
+            + sentence.substring(start, end) + '</span>' + sentence.substring(end)
+            }
+        }
     } else {
         var regex = new RegExp('\\b\\s' + word + '\\s\\b');
 
