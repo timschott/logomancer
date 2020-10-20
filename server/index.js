@@ -136,6 +136,10 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     var highlighted = ""
     var tmp = ""
 
+    if (sentence.length == 1) {
+    	highlighted = '<span style= "background-color: #69dcd6">' + sentence'</span>'
+    }
+
     if (word.indexOf('-') == -1) {
         var regex = new RegExp('\\b' + word + '\\b');
         if (regex.test(sentence)) {
