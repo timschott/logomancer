@@ -137,6 +137,8 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     var tmp = ""
 
     if (sentence.length == 1) {
+    	console.log('sentence is small', sentence)
+    	console.log('word is small', sentence)
     	highlighted = '<span style= "background-color: #69dcd6">' + sentence + '</span>'
     }
 
