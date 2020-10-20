@@ -137,7 +137,7 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
     var tmp = ""
 
     if (sentence.indexOf(' ') == -1) {
-    	highlighted = '<span style= "background-color: #69dcd6">' + sentence.substring(0, sentence.length - 1) + '</span>'
+    	highlighted = '<span style= "background-color: #69dcd6">' + sentence.substring(0, sentence.length - 1) + '</span>' + sentence.substring(sentence.length - 1)
     }
 
     if (word.indexOf('-') == -1) {
