@@ -196,7 +196,7 @@ hbs.registerHelper('getDescription', function (book, author, word, sentence, def
 
     tmp = '<div class="tab-pane" id ="' + word.toLowerCase() + '" ' + 'role="tabpanel">' +
         '<p> The word\'s definition is: </p><p> ' + '<em>' + definition + '</em> ' + '</p>' +
-        '<p> It is used in the book ' + '<span class = "special-name">' + book + '</span> by <span class="special-name">' + author + '</span> as follows: </p>' +
+        '<p> It is used in ' + '<span class = "special-name">' + book + '</span> by <span class="special-name">' + author + '</span> as follows: </p>' +
         '<p> ' + 
         highlighted +
         '<br>' + 
